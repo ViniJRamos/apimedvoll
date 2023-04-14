@@ -23,8 +23,13 @@ public class PacienteController {
     @GetMapping
     public ResponseEntity<Page<DadosListagemPaciente>> listar(@PageableDefault(page = 0, size = 10, sort = { "nome" }) Pageable paginacao) {
         var pacientes = repository.findAllByAtivoTrue(paginacao).map(DadosListagemPaciente::new);
-
         return ResponseEntity.ok(pacientes);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalharUm(@PathVariable Long id) {
+        var paciente = repository.getReferenceById(id);
+        return ResponseEntity.ok(paciente);
     }
 
     @PostMapping
@@ -32,9 +37,7 @@ public class PacienteController {
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroPaciente dados, UriComponentsBuilder UriBuilder) {
         var paciente = new Paciente(dados);
         repository.save(paciente);
-
         var uri = UriBuilder.path("/paciente/{id}").buildAndExpand(paciente.getId()).toUri();
-
         return ResponseEntity.created(uri).body(new DadosDetalhamentoPaciente(paciente));
     }
 
@@ -43,7 +46,6 @@ public class PacienteController {
     public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoPaciente dados) {
         var paciente = repository.getReferenceById(dados.id());
         paciente.atualizarInformacoes(dados);
-
         return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
     }
 
@@ -52,7 +54,6 @@ public class PacienteController {
     public ResponseEntity remover(@PathVariable Long id) {
         var paciente = repository.getReferenceById(id);
         paciente.inativar();
-
         return ResponseEntity.noContent().build();
     }
 
