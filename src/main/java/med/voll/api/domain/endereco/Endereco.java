@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import med.voll.api.domain.endereco.dto.DadosEndereco;
 
 @Embeddable
 @Getter

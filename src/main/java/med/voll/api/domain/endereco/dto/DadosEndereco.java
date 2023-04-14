@@ -1,4 +1,4 @@
-package med.voll.api.domain.endereco;
+package med.voll.api.domain.endereco.dto;
 
 public record DadosEndereco(
         String logradouro,
