@@ -1,0 +1,1 @@
+ALTER TABLE medicos ADD telefone TEXT DEFAULT '' NOT NULL;
