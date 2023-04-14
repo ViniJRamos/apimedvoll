@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import med.voll.api.endereco.Endereco;
 import med.voll.api.medico.DadosCadastroMedico;
 
-@Table(name = "paciente")
+@Table(name = "pacientes")
 @Entity(name = "Paciente")
 @Getter
 @NoArgsConstructor
@@ -37,15 +37,15 @@ public class Paciente {
         this.endereco = new Endereco(dados.endereco());
     }
 
-    public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
-        if (dados.nome() != null)
-            this.nome = dados.nome();
+   public void atualizarInformacoes(DadosAtualizacaoPaciente dados) {
+            if (dados.nome() != null)
+                this.nome = dados.nome();
 
-        if (dados.telefone() != null)
-            this.telefone = dados.telefone();
+            if (dados.telefone() != null)
+                this.telefone = dados.telefone();
 
-        if (dados.endereco() != null)
-            endereco.atualizaInformacoes(dados.endereco());
+            if (dados.endereco() != null)
+                endereco.atualizaInformacoes(dados.endereco());
         }
 
     public void inativar() {
